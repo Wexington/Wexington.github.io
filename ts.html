@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @font-face {
+    font-family: 'Hanson-Bold';
+    src: url('Hanson-Bold.otf') format('opentype');
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Hanson-Bold', sans-serif;
+  }
+
+  p {
+    text-align: center;
+    font-size: 60px;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 36px; /* Adjust the font size as needed */
+    margin-bottom: 20px; /* Add spacing below the heading */
+  }
+
+  #login-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  #login-button {
+    display: none;
+    margin-top: 20px;
+    font-family: 'Hanson-Bold', sans-serif;
+  }
+
+  /* Style the input fields */
+  input {
+    font-family: 'Hanson-Bold', sans-serif;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+
+  /* Style the list */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  /* Style the list items */
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 24px;
+    margin: 10px 0;
+    text-decoration: none; /* Add text-decoration property */
+    cursor: pointer; /* Add pointer cursor */
+  }
+
+</style>
+<link rel="icon" href="billcypher.jpeg" type="image/jpg">
+</head>
+<body>
+
+<p id="demo"></p>
+<button id="login-button">Login</button>
+
+<div id="login-container">
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button id="submit-button">Submit</button>
+</div>
+
+
+
+<ul id="name-list">
+  <!-- List items will be added dynamically using JavaScript -->
+</ul>
+
+<script>
+  var countDownDate = new Date("September 1, 2023 00:00:00").getTime();
+
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+      document.getElementById("login-button").style.display = "block";
+    }
+  }, 1000);
+
+  // Add login functionality
+  var submitButton = document.getElementById("submit-button");
+  submitButton.addEventListener("click", function() {
+    var username = document.getElementById("username").value.trim();
+    var password = document.getElementById("password").value.trim();
+
+    // Check if username and password are correct
+    if (username.toUpperCase() === "TEST" && password === "TEST") {
+      // Clear the website
+      document.body.innerHTML = "";
+      
+      // Display a list of ten names
+      var names = ["Name1", "Name2", "Name3", "Name4", "Name5", "Name6", "Name7", "Name8", "Name9", "Name10"];
+      var list = document.createElement("ul");
+      list.id = "name-list";
+      list.style.listStyle = "none";
+      for (var i = 0; i < names.length; i++) {
+        var listItem = document.createElement("li");
+        listItem.textContent = names[i];
+        list.appendChild(listItem);
+      }
+      document.body.appendChild(list);
+    }
+  });
+
+  // Show the login container and button when the countdown is over
+  document.getElementById("login-button").addEventListener("click", function() {
+    document.getElementById("login-container").style.display = "flex";
+    document.getElementById("login-button").style.display = "none";
+  });
+
+</script>
+
+</body>
+</html>
